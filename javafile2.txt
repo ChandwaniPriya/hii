@@ -1,0 +1,81 @@
+public static void main(String[] args){
+    Log.printline("  A simple example showing how to create
+ * two datacenters with one host each and
+ * run cloudlets of two users with network
+ * topology on them.")
+
+    try{
+        
+       # int num_user = 2;
+        Calendar calendar = Calendar.getInstance();
+        boolean trace_flag = false;
+
+        CloudSim.init(num_user, calendar, trace_flag);
+
+        Datacenter datacenter0 = createDatacenter("datacenter0")
+        Datacenter datacenter1 = createDatacenter("datacenter1")
+
+        DatacenterBroker broker1 = createBroker(1);
+        int brokerId1 = broker1.getId();
+        DatacenterBroker broker2 = createBroker(2);
+        int brokerId2 = broker2.getId();
+
+        VmList1 = new Array<VM>();
+        VmList2 = new Array<VM>();
+
+        int vmid = 0;
+        int pesNumber = 1;
+        int ram = 512;
+        long bw = 1000;
+        long size = 10000;
+        int mips = 250; 
+        String vmm = "Xen";
+
+        VM vm1 = new VM(vmid, brokerId, pesNumber, ram, bw, size, mips, vmm, new CloudletSchedulerTimeShared())
+        vmid++; //nahi aayega
+        VM vm2 = new VM(vmid, brokerId, pesNumber, ram, bw, size, mips, vmm, new CloudletSchedulerTimeShared())
+
+        VmList1.add(vm1)
+        VmList2.add(vm2)
+
+        broker1.submitVmList(VmList1);
+        broker2.submitVmList(VmList2);
+
+        CloudletList1 = new Array <CLoudlet> ();
+        CloudletList2 = new Array <CLoudlet> ();
+
+        int id = 0;
+        long length = 40000;
+        long fileSize = 300;
+        long outputSize = 300;
+        UtilizationModel utilizationModel = new UtilizationModelull()
+
+        Cloudlet cloudlet0 = new Cloudlet(id, length, fileSize, outputSize, utilizationModel, utilizationModel, utilizationModel);
+
+        Cloudlet cloudlet1 = new Cloudlet(id, length, fileSize, outputSize, utilizationModel, utilizationModel, utilizationModel);
+
+        Cloudlet0.setUserid(brokerId1);
+        Cloudlet1.setUserid(brokerId2);
+
+        CloudletList1.add(cloudlet0)
+        CloudletList2.add(cloudlet1)
+
+        broker1.submitCloudletList(CloudletList1)
+        broker2.submitCloudletList(CloudletList2)
+
+
+        NetworkToplogy.buildNetworkTopology("topology.brite")
+
+        int briteNode = 0
+        NetworkToplogy.mapNode(datacenter0.getId(), briteNode)
+
+        int briteNode = 2
+        NetworkToplogy.mapNode(datacenter1.getId(), briteNode)
+
+        int briteNode = 3
+        NetworkToplogy.map(brokerId1, briteNode)
+
+        int briteNode = 4
+        NetworkToplogy.mapNode(brokerId2, briteNode)
+    }
+}

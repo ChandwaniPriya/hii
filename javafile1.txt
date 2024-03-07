@@ -1,0 +1,74 @@
+public static void main(String[] args){
+    Log.printline(" A simple example showing how to create
+    two datacenters with one host and a
+    network topology each and run two cloudlets
+    on them.")
+
+    try{
+        
+        int num_user = 1;
+        Calendar calendar = Calendar.getInstance();
+        boolean trace_flag = false;
+
+        CloudSim.init(num_user, calendar, trace_flag);
+
+        Datacenter datacenter0 = createDatacenter("datacenter0")
+        Datacenter datacenter1 = createDatacenter("datacenter1")
+
+        DatacenterBroker broker = createBroker();
+        int brokerId = broker.getId();
+
+        VmList = new Array<VM>();
+
+        int vmid = 0;
+        int pesNumber = 1;
+        int ram = 512;
+        long bw = 1000;
+        long size = 10000;
+        int mips = 250; 
+        String vmm = "Xen";
+
+        VM vm1 = new VM(vmid, brokerId, pesNumber, ram, bw, size, mips, vmm, new CloudletSchedulerTimeShared())
+        vmid++;
+        VM vm2 = new VM(vmid, brokerId, pesNumber, ram, bw, size, mips, vmm, new CloudletSchedulerTimeShared())
+
+        vmlist.add(vm1)
+        vmlist.add(vm2)
+
+        broker.submitVmList(vmlist);
+
+        CloudletList = new Array <CLoudlet> ();
+
+        int id = 0;
+        long length = 40000;
+        long fileSize = 300;
+        long outputSize = 300;
+        UtilizationModel utilizationModel = new UtilizationModelull()
+
+        Cloudlet cloudlet0 = new Cloudlet(id, length, fileSize, outputSize, utilizationModel, utilizationModel, utilizationModel);
+
+        Cloudlet cloudlet1 = new Cloudlet(id, length, fileSize, outputSize, utilizationModel, utilizationModel, utilizationModel);
+
+        Cloudlet0.setUserid(brokerId);
+        Cloudlet1.setUserid(brokerId);
+
+        CloudletList.add(cloudlet0)
+        CloudletLista.add(cloudlet1)
+
+        broker.submitCloudletList(CloudletList)
+
+        broker.bindCloudletToVm(Cloudlet0.getCloudletId(), vm1.getVmId() )
+        broker.bindCloudletToVm(Cloudlet1.getCloudletId(), vm2.getVmId() )
+
+        NetworkToplogy.buildNetworkTopology("topology.brite")
+
+        int briteNode = 0
+        NetworkToplogy.mapNode(datacenter0.getId(), briteNode)
+
+        int briteNode = 2
+        NetworkToplogy.mapNode(datacenter1.getId(), briteNode)
+
+        int briteNode = 3
+        NetworkToplogy.map(brokerId, briteNode)
+    }
+}
